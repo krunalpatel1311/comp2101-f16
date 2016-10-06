@@ -14,12 +14,12 @@ ips[0]=`ifconfig ${interfaces[0]} | grep 'inet addr' | sed -e 's/ *inet addr://'
 
 ips[1]=`ifconfig ${interfaces[1]} | grep 'inet addr' | sed -e 's/ *inet addr://' | sed -e 's/ .*//'`
 
-ips==($ip0 $ip1)
+#ips==($ip0 $ip1)
 
 gatewayip=`route -n|grep '^0.0.0.0 '| awk '{print $2}'`
 
 cat <<EOF
-interfaces ${interfaces[0]} has ip address $ips[0]
+interfaces ${interfaces[0]} has ip address ${ips[0]}
 interfaces ${interfaces[1]} has ip address ${ips[1]}
 
 my gatewayip is $gatewayip
