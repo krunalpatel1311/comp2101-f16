@@ -5,9 +5,11 @@
 
 
 ###variables
+
+declare -i count
 count=0 #number of dies
 sides=0 #number of sides from 4 to 20 only 
-
+declare -i sides
 
 ##command line proccing 
 while [ $# -gt 0 ]; do
