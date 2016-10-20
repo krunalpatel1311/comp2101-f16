@@ -11,6 +11,15 @@ count=0 #number of dies
 sides=0 #number of sides from 4 to 20 only 
 declare -i sides
 
+
+###fuction 
+
+function error-message {
+    echo "$@" >&2 
+    
+}
+
+
 ##command line proccing 
 while [ $# -gt 0 ]; do
     case "$1" in
@@ -26,7 +35,7 @@ while [ $# -gt 0 ]; do
             count=$2
             shift
         else
-            echo "you gave me '$2' as the number of dice to roll, bad plan muchcho" >&2
+            error-message "you gave me '$2' as the number of dice to roll, bad plan muchcho" 
             exit 1
         fi
         
@@ -42,14 +51,14 @@ while [ $# -gt 0 ]; do
             
             fi
         else
-            echo "you gave me '$2' as the number of sides per die, no way that happning" >&2
+            error-message "you gave me '$2' as the number of sides per die, no way that happning" 
             exit 1
         fi
         
         ;;
     * )
     
-            echo "i din't understand '$1' " >&2
+            error-message "i din't understand '$1' " 
             echo "Usage: $0 [-h] [-c numberofdice] [-s numberofsidesperdie] [-s 4-20]"
             exit 1
         ;;    
@@ -62,22 +71,17 @@ done
 
 #get a valid roll count from user 
 
-until [[ $count =~ ^[1-9][0-9]*$ ]]; do
+until [ $count -gt 0 ]; do
   read -p "How many dice shall I roll[1-5]? " count
 # ignore empty guesses
 
   [ -n "$count" ] || continue
 
 done
-until [[ $sides =~ ^[1-9][0-9]*$ ]]; do
+until [ $sides -gt 3 -a $sides -lt 21 ]; do
   read -p "How many sides each have [4-20]? " sides
   
-  if [$sides -lt 4 -o $sides -gt 20]; then
-    echo "$sides must be 4 to 20 " >&2
-    
-    sides=0
-  
-  fi
+ 
 done
 ##main
 # do the dice roll as many times as the user asked for
