@@ -53,7 +53,7 @@ while [ $# -gt 0 ]; do
         
         b=$2
         
-        #echo "Value of number is $number"
+    
         
         else 
         
